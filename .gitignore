@@ -1,0 +1,51 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+bin/
+lib/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# === Arduino IDE & PlatformIO ===
+# Временные файлы сборки
+.build/
+build/
+bin/
+Build/
+Artifacts/
+ipch/
+
+# Специфичные папки PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Настройки редакторов кода (VS Code, CLion и др.)
+.vscode/
+.idea/
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+
+# === Файлы симулятора (Wokwi) ===
+# Если захочешь сохранить файл диаграммы Wokwi, удали строку ниже.
+# Но временные логи симуляции точно стоит игнорировать.
+*.log
