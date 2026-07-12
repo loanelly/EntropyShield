@@ -1,0 +1,82 @@
+===============================================================================
+                         TECHNICAL DOCUMENTATION REPORT
+                               LNL-EntropyShield
+===============================================================================
+Author: LNL-Engineering (https://github.com/LNL-Engineering)
+Version: 1.0
+Purpose: Hardware True Random Number Generator (TRNG) for Cryptography
+===============================================================================
+
+1. INTRODUCTION & PROBLEM STATEMENT
+-----------------------------------
+Modern computing architectures are deterministic state machines. They are inherently 
+incapable of generating true randomness. Standard software functions (such as 
+rand() in C++ or random in Python) rely on Pseudo-Random Number Generators (PRNGs). 
+These algorithms operate using mathematical formulas: knowing the initial seed value 
+allows an attacker or an AI/ML predictive system to completely forecast the entire 
+stream of cryptographic keys.
+
+The LNL-EntropyShield project mitigates this vulnerability by harvesting physical 
+entropy from the microscopic world (quantum chaos within semiconductors), making 
+the generated security keys mathematically unpredictable and immune to reverse-engineering.
+
+2. HARDWARE ARCHITECTURE
+------------------------
+In a physical deployment (Production Mode), the system comprises three core building blocks:
+
+A) Entropy Source (Noise Generation):
+   An NPN transistor (e.g., BC547) is reverse-biased, forcing its p-n junction to 
+   operate within the avalanche breakdown region. The movement of charge carriers 
+   in this state produces microvolt-level white noise (thermal and shot noise). 
+   This noise has a purely quantum physical nature and is fundamentally unpredictable.
+
+B) Amplification Stage:
+   The raw physical noise amplitude is extremely weak (microvolts). The signal is 
+   routed through a low-noise operational amplifier (e.g., LM358), which scales the 
+   amplitude up to a stable 0V–5V range suitable for digital processing.
+
+C) Processing Unit (Microcontroller):
+   An Arduino Nano samples the amplified analog signal using its internal Analog-to-Digital 
+   Converter (ADC) on the A0 pin. To maximize randomness, the firmware isolates and 
+   captures only the unstable Least Significant Bit (LSB) of each voltage reading.
+
+3. MATHEMATICAL DEBIASING: VON NEUMANN EXTRACTOR
+------------------------------------------------
+All physical electronic components suffer from imperfections, such as power grid hum 
+(50Hz/60Hz) or thermal drift. This creates an unbalance or "hardware bias" in the raw 
+ADC readings (e.g., generating 52% of ones and 48% of zeros).
+
+To purge the entropy stream of any statistical bias, a Von Neumann Corrector algorithm 
+is implemented directly into the firmware. It processes incoming bits in pairs:
+- The sequence '1' followed by '0' (10) -> converted into a clean '1' bit
+- The sequence '0' followed by '1' (01) -> converted into a clean '0' bit
+- Sequences '00' and '11'               -> completely discarded
+
+This rigorous extractor guarantees a flawless 50/50 balance of zeros and ones in the 
+final cryptographic output, erasing all structural patterns.
+
+4. SYSTEM MODES (WOKWI VS PRODUCTION)
+-------------------------------------
+For seamless cross-platform validation, a preprocessor compiler toggle is included:
+
+1) #define WOKWI_EMULATION_MODE true (Simulation Mode)
+   Digital circuit simulators (Wokwi) cannot model the physical chaos of moving electrons. 
+   To prevent the Von Neumann loop from locking up in the browser, this mode introduces 
+   microsecond phase jitter and a software PRNG fallback. This enables visual functional 
+   debugging of the pipeline.
+
+2) #define WOKWI_EMULATION_MODE false (Production Mode)
+   All software fallback crutches are disabled. The ADC sampler clock is accelerated, 
+   and the microcontroller relies exclusively on the raw physical noise on the A0 pin.
+
+5. SOFTWARE ECOSYSTEM (PYTHON CLIENT)
+-------------------------------------
+The host computer application acts as an entropy collector:
+1. Establishes a connection with the hardware via Serial (USB) protocol at 115200 baud.
+2. Reads the purified hardware HEX data stream byte-by-byte.
+3. Accumulates the stream until it reaches the targeted cryptographic length (e.g., 32 bytes).
+4. Delivers the high-entropy token (AES-256 key) to client applications like password managers.
+
+===============================================================================
+                LNL-Engineering — Security-Oriented Systems
+===============================================================================
