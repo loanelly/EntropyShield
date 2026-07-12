@@ -1,0 +1,99 @@
+===============================================================================
+                    HARDWARE CONNECTION & ASSEMBLY GUIDE
+                     РУКОВОДСТВО ПО ПОДКЛЮЧЕНИЮ И СБОРКЕ
+                             LNL-EntropyShield
+===============================================================================
+Organization / Организация: LNL-Engineering (https://github.com/LNL-Engineering)
+Target Platform / Платформа: Arduino Nano / Uno (ATmega328P)
+===============================================================================
+
+-------------------------------------------------------------------------------
+[EN] ENGLISH VERSION
+-------------------------------------------------------------------------------
+
+1. OVERVIEW
+This guide describes how to connect the electronic components to build the physical 
+EntropyShield hardware generator. The circuit uses an NPN transistor as a white 
+noise source and an LM358 operational amplifier to boost the signal.
+
+2. COMPONENT LIST (BOM)
+- Arduino Nano / Uno (1x)
+- BC547 NPN Transistor (1x) - Used as the entropy noise source
+- LM358 Operational Amplifier (1x) - Signal booster
+- 100kΩ Resistor (2x)
+- 10kΩ Resistor (1x)
+- 1MΩ Resistor (1x) - Configures the amplifier gain
+- 100nF Ceramic Capacitor (2x) - Filters DC bias and power grid hum
+
+3. PIN CONNECTION MATRIX
+To assemble the circuit on a breadboard or PCB, make the following connections:
+
+A) Transistor (Noise Source Stage):
+   - Collector: Leave completely FLOATING (Not connected to anything).
+   - Base: Connect to Ground (GND).
+   - Emitter: Connect to 12V external power supply (or 9V battery) through a 100kΩ resistor.
+   * Note: The avalanche breakdown happens when the p-n junction is reverse-biased.
+
+B) Amplifier Stage (LM358):
+   - Pin 8 (VCC): Connect to Arduino 5V pin.
+   - Pin 4 (GND): Connect to Arduino GND pin.
+   - Pin 3 (Non-Inverting Input): Connect to the Transistor Emitter via a 100nF capacitor.
+   - Pin 2 (Inverting Input): Connect to the feedback loop (1MΩ resistor to Output pin 1).
+   - Pin 1 (Output): Connect to Arduino Analog Pin A0.
+
+C) Processing Unit (Arduino):
+   - Pin A0: Input for the amplified 0V-5V analog physical noise.
+   - USB Port: Connect to PC for power and serial data delivery.
+
+4. SAFETY WARNING
+Ensure that the high-voltage rail (9V/12V used for transistor breakdown) does not 
+accidentally touch the Arduino analog pins directly. Always pass the signal through 
+the 100nF decoupling capacitor to protect the microcontroller.
+
+
+-------------------------------------------------------------------------------
+[RU] РУССКАЯ ВЕРСИЯ
+-------------------------------------------------------------------------------
+
+1. ОБЩЕЕ ОПИСАНИЕ
+Это руководство описывает, как соединить электронные компоненты для сборки 
+физического генератора случайных чисел EntropyShield. Схема использует NPN-транзистор 
+в качестве источника белого шума и операционный усилитель LM358 для раскачки сигнала.
+
+2. СПИСОК КОМПОНЕНТОВ
+- Arduino Nano / Uno (1 шт.)
+- NPN-транзистор BC547 (1 шт.) - Источник энтропийного шума
+- Операционный усилитель LM358 (1 шт.) - Усилитель сигнала
+- Резистор 100 кОм (2 шт.)
+- Резистор 10 кОм (1 шт.)
+- Резистор 1 МОм (1 шт.) - Задает коэффициент усиления
+- Керамический конденсатор 100 нФ (2 шт.) - Фильтрует постоянный ток и сетевые наводки
+
+3. МАТРИЦА ПОДКЛЮЧЕНИЯ КОМПОНЕНТОВ
+Для сборки схемы на макетной плате или текстолите выполните следующие соединения:
+
+А) Транзисторный узел (Источник шума):
+   - Коллектор (Collector): Оставьте полностью СВОБОДНЫМ (никуда не подключать).
+   - База (Base): Подключите к заземлению (GND).
+   - Эмиттер (Emitter): Подключите к внешнему источнику питания 12В (или батарейке 9В) через резистор 100 кОм.
+   * Примечание: Лавинный пробой происходит только при обратном смещении p-n перехода.
+
+Б) Модуль усилителя (LM358):
+   - Пин 8 (VCC): Подключите к пину 5V на Arduino.
+   - Пин 4 (GND): Подключите к пину GND на Arduino.
+   - Пин 3 (Неинвертирующий вход): Подключите к Эмиттеру транзистора через конденсатор 100 нФ.
+   - Пин 2 (Инвертирующий вход): Подключите к цепи обратной связи (резистор 1 МОм, идущий на выходной пин 1).
+   - Пин 1 (Выход): Подключите к аналоговому пину A0 на Arduino.
+
+В) Микроконтроллер (Arduino):
+   - Пин A0: Принимает усиленный аналоговый физический шум в диапазоне 0В-5В.
+   - USB-порт: Подключается к ПК для питания и передачи готовых ключей.
+
+4. МЕРЫ ПРЕДОСТОРОЖНОСТИ
+Следите за тем, чтобы напряжение с высоковольтной линии (9В/12В, необходимое для 
+пробоя транзистора) случайно не попало напрямую на аналоговые пины Arduino. 
+Обязательно пропускайте сигнал через разделительный конденсатор 100 нФ для защиты чипа.
+
+===============================================================================
+                      LNL-Engineering — 2026 Hardware Labs
+===============================================================================
