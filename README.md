@@ -1,4 +1,4 @@
-<img src="/img/Logo%20variations/WayPacker1.1.0.png" align="right" width="110px">
+<img src="img/logo/logo.png" align="right" width="110px">
 
 
 # EntropyShield
