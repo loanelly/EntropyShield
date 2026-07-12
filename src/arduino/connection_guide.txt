@@ -6,7 +6,8 @@
 Organization / Организация: LNL-Engineering (https://github.com/LNL-Engineering)
 Target Platform / Платформа: Arduino Nano / Uno (ATmega328P)
 ===============================================================================
-
+[EN] For visual reference, see: src/documentation/schematic.png
+[RU] Визуальную схему подключения см. здесь: src/documentation/schematic.png
 -------------------------------------------------------------------------------
 [EN] ENGLISH VERSION
 -------------------------------------------------------------------------------
