@@ -1,9 +1,9 @@
-<img src="img/logo/logo.png" align="right" width="170px">
+<img src="img/logo/logo.png" align="right" width="150px">
 
 
 # EntropyShield
 
-**Language:**  <a href="https://github.com/loanelly/WayPacker/blob/main/README_EN.md"><img src="img/Flags/EN1.png" height="21" align="center"/></a> <a href="https://github.com/loanelly/WayPacker/blob/main/README.md"><img src="img/Flags/result.png" height="26" align="center"/></a>
+**Language:**  <a href="https://github.com/loanelly/EntropyShield/blob/main/README.md"><img src="img/Flags/EN1.png" height="21" align="center"/></a> <a href="https://github.com/loanelly/EntropyShield/blob/main/README_RU.md"><img src="img/Flags/result.png" height="26" align="center"/></a>
 
 A professional hardware-based **True Random Number Generator (TRNG)** that harvests pure, unpredictable physical entropy from thermal/shot noise (avalanche breakdown in a reverse-biased p-n junction). 
 
