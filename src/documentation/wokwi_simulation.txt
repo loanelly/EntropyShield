@@ -1,0 +1,27 @@
+===============================================================================
+                        WOKWI INTERACTIVE SIMULATION
+                       ИНТЕРАКТИВНАЯ СИМУЛЯЦИЯ WOKWI
+                             LNL-EntropyShield
+===============================================================================
+
+[EN] 
+You can test and debug the LNL-EntropyShield firmware directly in your browser.
+Click the link below to open the interactive hardware simulator:
+
+👉 https://wokwi.com/projects/469345848377569281
+
+* Note: Make sure '#define WOKWI_EMULATION_MODE true' is set in the code 
+  to run the simulation correctly inside the browser environment.
+
+-------------------------------------------------------------------------------
+
+[RU]
+Вы можете протестировать и отладить прошивку LNL-EntropyShield прямо в браузере.
+Перейдите по ссылке ниже, чтобы открыть интерактивный симулятор железа:
+
+👉 https://wokwi.com/projects/469345848377569281
+
+* Примечание: Убедитесь, что в коде установлено '#define WOKWI_EMULATION_MODE true',
+  чтобы симуляция корректно работала внутри виртуальной среды браузера.
+
+===============================================================================
