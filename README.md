@@ -1,4 +1,4 @@
-<img src="img/logo/logo.png" align="right" width="110px">
+<img src="img/logo/logo.png" align="right" width="170px">
 
 
 # EntropyShield
